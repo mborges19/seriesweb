@@ -16,7 +16,6 @@ class BoxSeries extends Component{
         let resposta = await fetch('http://localhost:3000/series')    
         const series = await resposta.json()
         this.setState({series: series})
-        console.log(series)
       }
 
       enviaDados = async (serie) =>{
@@ -46,6 +45,22 @@ class BoxSeries extends Component{
         }
       }
 
+      deleta = async (id) => {
+        const serieAtual = this.state.series
+        const params = {
+            method: 'DELETE',
+        }
+        const retorno = await
+            fetch('http://localhost:3000/series/' + id,params)
+        if(retorno.status === 204){
+            this.setState({
+              series: serieAtual.filter((serie) => {
+                return serie.id !== id
+              })
+            })
+        }
+    }
+
     render(){
         return(
             <div className='container'>
@@ -54,7 +69,7 @@ class BoxSeries extends Component{
                   <FormularioSeries enviaDados={this.enviaDados}/>
                 </div>
                 <div className='col-md-8'>
-                  <TabelaSeries series={this.state.series}/>
+                  <TabelaSeries series={this.state.series} deleta={this.deleta}/>
                 </div>
               </div>
             </div>
