@@ -21,8 +21,14 @@ const ListaSeries = (props) =>{
                             <div className='text-center mt-1'>
                                 <button className='btn btn btn-outline-danger btn-sm mr-2' onClick={() => {
                                     if(window.confirm('Confirma a execução?'))
-                                    props.deleta(series.id)}}>Delete</button>
-                                <button className='btn btn btn-outline-warning btn-sm'>Editar</button>
+                                        props.deleta(series.id)}}>Delete</button>
+                                <button 
+                                    className='btn btn btn-outline-warning btn-sm' 
+                                    onClick={() => {
+										props.consulta(series)
+									}}>
+                                        Editar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -36,14 +42,14 @@ class TabelaSeries extends Component {
 
     render(){
 
-        const {series, deleta} = this.props
+        const {series, deleta, consulta} = this.props
         
         return(
             <div className='card'>
                 <div className='card-header'>
                     <h5 className='text-center'>Lista de Séries</h5>
                 </div>
-                <ListaSeries series={series} deleta={deleta}/>
+                <ListaSeries series={series} deleta={deleta} consulta={consulta}/>
           </div>
         )
     }
