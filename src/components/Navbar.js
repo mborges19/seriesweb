@@ -1,5 +1,5 @@
 import {Link, Redirect} from 'react-router-dom'
-import React, { componet, Component } from 'react'
+import React, { Component } from 'react'
 import {signOut} from '../services/auth-service'
 
 export default class Navbar extends Component {
